@@ -1,0 +1,21 @@
+{
+  "detectedConfig": {
+    "typescript": false,
+    "naming": "Pascal Case",
+    "unit": "px",
+    "framework": "html-css",
+    "styling": "CSS"
+  },
+  "locofyConfig": {
+    "project_name": "FerencFinance",
+    "id": "654e9fe102b76f2b7a5716e8",
+    "framework": "react",
+    "typescript": false,
+    "path": "public/",
+    "componentsPath": "c:\\Users\\TPata\\drf_course\\src\\components",
+    "screensPath": "c:\\Users\\TPata\\drf_course\\venv\\Lib\\site-packages\\django\\views",
+    "styling": "CSS Modules",
+    "unit": "px",
+    "naming": "Pascal Case"
+  }
+}
