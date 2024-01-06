@@ -25,4 +25,9 @@ urlpatterns += [
         ferencfinance_views.HighestProfitEMAView.as_view(),
         name="highest-profit-ema",
     ),
+    path(
+        "<uuid:stock_id>/all_ema_periods/",
+        ferencfinance_views.AllEMAPeriodsView.as_view(),
+        name="all-ema-periods",
+    ),
 ]

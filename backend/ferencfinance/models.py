@@ -23,6 +23,7 @@ class Stock(Model):
 class EMA(Model):
     stock = models.ForeignKey(Stock, on_delete=models.CASCADE)
     signals = models.JSONField()
+    ema = models.JSONField()
     xirr = models.DecimalField(max_digits=10, decimal_places=4, null=True, blank=True)
     profit = models.IntegerField()
     period = models.PositiveIntegerField()

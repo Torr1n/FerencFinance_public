@@ -1,0 +1,201 @@
+.logotext,
+.minilogo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.logotext {
+  margin: 0;
+  position: relative;
+  font-size: inherit;
+  font-weight: 400;
+  font-family: inherit;
+  width: 24px;
+  height: 20px;
+  flex-shrink: 0;
+}
+.minilogo {
+  border-radius: var(--br-5xs);
+  background-color: var(--color-silver);
+  overflow: hidden;
+  flex-direction: column;
+  padding: var(--padding-11xs) var(--padding-10xs);
+}
+.ferencfinance {
+  position: relative;
+  font-size: var(--extra-font-size-18-semibold-size);
+  display: inline-block;
+  font-family: var(--font-poppins);
+  color: var(--text-color-pure-white);
+  text-align: left;
+  width: 142px;
+  height: 23px;
+  flex-shrink: 0;
+}
+.logo {
+  align-self: stretch;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  gap: var(--gap-xs);
+}
+.activeicon {
+  color: var(--text-color-text-1);
+}
+.inactiveicon {
+  color: var(--text-color-text-2);
+}
+.stockicon {
+  position: relative;
+  width: 30px;
+  height: 30px;
+}
+.navlink {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.deleteicon {
+  position: relative;
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+}
+.selectedstockname {
+  position: relative;
+  font-size: var(--size-16-size-16-regular-size);
+  font-weight: 1000;
+  font-family: var(--extra-font-size-18-semibold);
+  color: var(--text-color-text-1);
+  text-align: left;
+  padding-left: 5px;
+}
+.selectedstock {
+  cursor: pointer;
+  border: 0;
+  padding: var(--padding-sm) var(--padding-mini);
+  background-color: var(--primary-color);
+  border-radius: var(--br-5xs);
+  width: 200px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+}
+.stockname {
+  position: relative;
+  font-size: var(--size-16-size-16-regular-size);
+  font-weight: 800;
+  font-family: var(--extra-font-size-18-semibold);
+  color: var(--text-color-text-2);
+  text-align: left;
+  padding-left: 5px;
+}
+.iconstockname {
+  position: relative;
+  font-size: var(--size-14-size-14-medium-size);
+  font-weight: 800;
+  font-family: var(--extra-font-size-18-semibold);
+  color: var(--text-color-text-2);
+  text-align: left;
+  order: 2;
+}
+.stock {
+  cursor: pointer;
+  border: 0;
+  padding: var(--padding-sm) var(--padding-mini);
+  background-color: transparent;
+  border-radius: var(--br-5xs);
+  width: 200px;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+}
+.addstock,
+.stock,
+.stocks {
+  flex-shrink: 0;
+  display: flex;
+}
+.addstock {
+  cursor: pointer;
+  border: 0;
+  padding: var(--padding-sm) var(--padding-mini);
+  background-color: transparent;
+  align-self: stretch;
+  border-radius: var(--br-5xs);
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-color-text-2);
+}
+.stocks {
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: var(--gap-11xs);
+}
+.logouticon {
+  position: relative;
+  width: 24px;
+  height: 24px;
+  color: var(--text-color-text-2);
+  order: 1;
+}
+.logout,
+.logout {
+  flex-shrink: 0;
+  justify-content: flex-start;
+}
+.logout {
+  cursor: pointer;
+  border: 0;
+  padding: var(--padding-sm) var(--padding-mini);
+  background-color: transparent;
+  border-radius: var(--br-5xs);
+  width: 200px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  box-sizing: border-box;
+  gap: var(--gap-xs);
+}
+
+.logout,
+.main,
+.navbar,
+.sidebar {
+  display: flex;
+  align-items: flex-start;
+}
+.main {
+  flex: 1;
+  flex-shrink: 0;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.navbar,
+.sidebar {
+  align-self: stretch;
+}
+.sidebar {
+  background-color: var(--darkish-color-dark-shade);
+  flex-direction: column;
+  justify-content: center;
+  padding: var(--padding-11xl) var(--padding-6xl) var(--padding-81xl);
+  gap: var(--gap-21xl);
+}
+.navbar {
+  flex-direction: row;
+  justify-content: flex-start;
+  text-align: center;
+  font-size: var(--font-size-2xl);
+  color: var(--color-black);
+  font-family: var(--font-racing-sans-one);
+  height: 100%;
+}

@@ -1,0 +1,96 @@
+.email {
+  flex: 1;
+  position: relative;
+  font-weight: 500;
+}
+.emailWrapper {
+  align-self: stretch;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: var(--padding-3xs) var(--padding-3xs) var(--padding-3xs) 0px;
+}
+.inputChild {
+  border: 1px solid var(--darkish-color-dark-2);
+  outline: none;
+  font-weight: 500;
+  font-family: var(--extra-font-size-18-semibold);
+  font-size: var(--size-14-size-14-medium-size);
+  background-color: transparent;
+  align-self: stretch;
+  border-radius: var(--br-3xs);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  padding: var(--padding-mini) var(--padding-6xl) var(--padding-base)
+    var(--padding-xl);
+  color: white;
+}
+.input {
+  align-self: stretch;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+}
+.wrapperFrame129Child {
+  outline: none;
+  padding: var(--padding-mini) var(--padding-6xl) var(--padding-base)
+    var(--padding-xl);
+  color: white;
+  border: none;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+}
+.elipsIcon {
+  position: absolute;
+  width: 65px;
+  height: 5px;
+  z-index: 2;
+  left: 20px;
+  top: 21px;
+}
+.wrapperFrame129 {
+  position: relative;
+  border: 1px solid var(--darkish-color-dark-2);
+  background-color: transparent;
+  align-self: stretch;
+  border-radius: var(--br-3xs);
+  box-sizing: border-box;
+  height: 48px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+}
+.input1 {
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+}
+.inputsform1 {
+  align-self: stretch;
+  height: 175px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: var(--gap-8xs);
+}
+.signInMain {
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  text-align: left;
+  font-size: var(--size-14-size-14-medium-size);
+  color: var(--text-color-pure-white);
+  font-family: var(--extra-font-size-18-semibold);
+}

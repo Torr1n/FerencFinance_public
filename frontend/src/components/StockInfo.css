@@ -1,0 +1,18 @@
+.stockinfo {
+  align-self: stretch;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: var(--gap-21xl);
+  text-align: left;
+  font-size: var(--size-14-size-14-medium-size);
+  color: var(--text-color-text-2);
+  font-family: var(--extra-font-size-18-semibold);
+}
+
+@media screen and (max-width: 1200px) {
+  .stockinfo {
+    flex-direction: column;
+  }
+}

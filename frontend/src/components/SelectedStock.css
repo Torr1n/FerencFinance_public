@@ -1,0 +1,28 @@
+.stockname5 {
+  margin: 0;
+  position: relative;
+  font-size: inherit;
+  font-weight: 600;
+  font-family: inherit;
+}
+.selectedstock1,
+.top-bar {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+}
+.selectedstock1 {
+  background-color: var(--darkish-color-dark-bg);
+  align-self: stretch;
+  flex: 1;
+  overflow-y: auto;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: var(--padding-16xl) var(--padding-26xl);
+  gap: var(--gap-11xl);
+  text-align: left;
+  font-size: var(--font-size-6xl);
+  color: var(--text-color-pure-white);
+  font-family: var(--extra-font-size-18-semibold);
+}

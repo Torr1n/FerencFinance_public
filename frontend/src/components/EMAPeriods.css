@@ -1,0 +1,40 @@
+.emaPeriods {
+  position: relative;
+  font-weight: 600;
+}
+.title {
+  align-self: stretch;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+.main {
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: var(--gap-xs);
+  font-size: var(--size-14-size-14-medium-size);
+}
+.emaperiods {
+  align-self: stretch;
+  height: 421px;
+  overflow-y: auto;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: var(--gap-lg);
+  text-align: left;
+  font-size: var(--extra-font-size-18-semibold-size);
+  color: var(--text-color-pure-white);
+  font-family: var(--extra-font-size-18-semibold);
+  padding: var(--padding-xl) var(--padding-lgi) var(--padding-xl)
+    var(--padding-6xl);
+  border: var(--darkish-color-dark-2) solid;
+  border-radius: 10px;
+  border-width: 1px;
+}

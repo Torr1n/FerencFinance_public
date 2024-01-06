@@ -1,0 +1,281 @@
+.stockname {
+  margin: 0;
+  position: relative;
+  font-size: inherit;
+  font-weight: 600;
+  font-family: inherit;
+}
+.top-bar {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+}
+.xirrgraph-icon {
+  align-self: stretch;
+  max-width: 100%;
+  overflow: hidden;
+  height: 605px;
+  flex-shrink: 0;
+  object-fit: cover;
+}
+.excelicon {
+  position: relative;
+  width: 16.7px;
+  height: 16.7px;
+}
+.exceldownload {
+  position: relative;
+  font-size: 14px;
+  font-weight: 600;
+  font-family: "Kumbh Sans";
+  color: #1b212d;
+  text-align: left;
+}
+.dashboarddata,
+.selectedstock {
+  display: flex;
+  align-items: center;
+}
+.selectedstock {
+  cursor: pointer;
+  border: 0;
+  padding: 14px 15px;
+  background-color: #c8ee44;
+  border-radius: 8px;
+  width: 200px;
+  flex-direction: row;
+  justify-content: space-between;
+  box-sizing: border-box;
+}
+.dashboarddata {
+  flex: 1;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10px;
+}
+.stocks {
+  position: relative;
+  font-weight: 600;
+}
+.title {
+  align-self: stretch;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+.thisweek,
+.ticker {
+  position: relative;
+  font-weight: 600;
+}
+.ticker {
+  display: inline-block;
+  width: 200px;
+  flex-shrink: 0;
+}
+.thisweek {
+  flex: 1;
+}
+.fieldheaders,
+.header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.fieldheaders {
+  width: 247px;
+  flex-shrink: 0;
+  justify-content: flex-end;
+  text-align: right;
+}
+.header {
+  align-self: stretch;
+  justify-content: space-between;
+  padding: 0 25px;
+  font-size: 12px;
+  color: #78778b;
+}
+.tto {
+  position: relative;
+  font-weight: 500;
+}
+.ticker1 {
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+}
+.profit1,
+.thisweek1,
+.xirr1 {
+  position: relative;
+  font-weight: 600;
+  display: inline-block;
+  width: 69px;
+  flex-shrink: 0;
+}
+.profit1,
+.xirr1 {
+  width: 95px;
+}
+.xirr1 {
+  width: 94px;
+}
+.fields {
+  margin: 0;
+  align-items: flex-start;
+  justify-content: space-between;
+  text-align: right;
+  font-size: 14px;
+  color: #fff;
+  font-family: "Kumbh Sans";
+}
+.fields,
+.fields1,
+.stock {
+  display: flex;
+  flex-direction: row;
+}
+.stock {
+  align-self: stretch;
+  border-radius: 8px;
+  background-color: red;
+  height: 40px;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 15px 14px 25px;
+  box-sizing: border-box;
+}
+.fields1 {
+  width: 130px;
+  align-items: flex-start;
+  justify-content: flex-start;
+  text-align: right;
+}
+.stock1 {
+  align-self: stretch;
+  border-radius: 8px;
+  height: 40px;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 15px 14px 25px;
+  box-sizing: border-box;
+}
+.fields2,
+.stock1,
+.stock2 {
+  display: flex;
+  flex-direction: row;
+}
+.fields2 {
+  width: 117px;
+  align-items: flex-start;
+  justify-content: flex-start;
+  text-align: right;
+}
+.stock2 {
+  align-self: stretch;
+  border-radius: 8px;
+  background-color: #00ff47;
+  height: 40px;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 15px 14px 25px;
+  box-sizing: border-box;
+}
+.main,
+.stocktransactions {
+  align-self: stretch;
+  flex-direction: column;
+}
+.main {
+  height: 175px;
+  overflow-y: auto;
+  flex-shrink: 0;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 5px;
+  font-size: 14px;
+}
+.stocktransactions {
+  flex: 1;
+  border-radius: 10px;
+  background-color: #1c1a2e;
+  border: 1px solid #282541;
+  padding: 20px 19px 20px 0;
+  gap: 10px;
+}
+.additionalinfo,
+.homepage,
+.stockinfo,
+.stocktransactions {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+.additionalinfo {
+  width: 354px;
+  height: 672px;
+  flex-direction: column;
+  padding: 0 0 39px;
+  box-sizing: border-box;
+}
+.homepage,
+.stockinfo {
+  text-align: left;
+  color: #fff;
+  font-family: "Kumbh Sans";
+}
+.stockinfo {
+  align-self: stretch;
+  flex-direction: row;
+  gap: 40px;
+  font-size: 18px;
+}
+.homepage {
+  width: 1247px;
+  height: 920px;
+  overflow-y: auto;
+  flex-direction: column;
+  padding: 35px 45px;
+  box-sizing: border-box;
+  gap: 30px;
+  color: var(--darkish-color-dark-bg);
+  font-size: 25px;
+}
+@media screen and (max-width: 1200px) {
+  .exceldownload {
+    display: none;
+  }
+  .selectedstock {
+    width: auto;
+    align-self: unset;
+  }
+  .dashboarddata {
+    flex: unset;
+    align-self: stretch;
+  }
+  .additionalinfo {
+    align-self: stretch;
+    width: auto;
+  }
+  .stockinfo {
+    flex-direction: column;
+  }
+}
+@media screen and (max-width: 960px) {
+  .stockname {
+    display: flex;
+  }
+  .additionalinfo {
+    align-self: stretch;
+    width: auto;
+  }
+}

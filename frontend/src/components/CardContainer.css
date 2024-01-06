@@ -1,0 +1,47 @@
+.icon1 {
+  position: relative;
+  width: 42px;
+  height: 42px;
+}
+.profit1 {
+  align-self: stretch;
+  position: relative;
+  font-size: 15px;
+}
+.value {
+  align-self: stretch;
+  position: relative;
+  font-size: var(--font-size-5xl);
+  color: var(--text-color-pure-white);
+}
+.profit {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: var(--gap-3xs);
+}
+.profitcard {
+  flex: 1;
+  border-radius: var(--br-3xs);
+  background-color: var(--darkish-color-dark-2);
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  padding: var(--padding-5xl) var(--padding-xl);
+  gap: var(--gap-mini);
+  text-align: left;
+  font-size: var(--size-14-size-14-medium-size);
+  color: var(--text-color-text-2);
+  font-family: var(--extra-font-size-18-semibold);
+}
+
+@media screen and (max-width: 960px) {
+  .profitcard {
+    flex: unset;
+    align-self: stretch;
+  }
+}

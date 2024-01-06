@@ -1,0 +1,92 @@
+.ticker {
+  align-self: stretch;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: var(--padding-3xs) var(--padding-3xs) var(--padding-3xs) 0px;
+}
+.input3 {
+  border: 1px solid var(--darkish-color-dark-2);
+  outline: none;
+  font-weight: 500;
+  font-family: var(--extra-font-size-18-semibold);
+  font-size: var(--size-14-size-14-medium-size);
+  background-color: transparent;
+  align-self: stretch;
+  border-radius: var(--br-3xs);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--padding-mini) var(--padding-6xl) var(--padding-base)
+    var(--padding-xl);
+  color: white;
+}
+.input2 {
+  align-self: stretch;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+}
+.startDate {
+  flex: 1;
+  position: relative;
+  font-weight: 500;
+}
+.input4 {
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+}
+.inputsform {
+  align-self: stretch;
+  height: 175px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: var(--gap-8xs);
+}
+.errorMessage {
+  color: red;
+}
+.addStockMain {
+  position: relative;
+  font-size: var(--size-16-size-16-regular-size);
+  font-weight: 600;
+  font-family: var(--extra-font-size-18-semibold);
+  color: var(--text-color-text-1);
+  text-align: center;
+  display: inline-block;
+  width: 465px;
+  flex-shrink: 0;
+}
+.submit1 {
+  cursor: pointer;
+  border: none;
+  padding: var(--padding-sm) var(--padding-xl);
+  background-color: var(--primary-color);
+  align-self: stretch;
+  border-radius: var(--br-3xs);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+.mainform {
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: var(--gap-xl);
+  text-align: left;
+  font-size: var(--size-14-size-14-medium-size);
+  color: var(--text-color-pure-white);
+  font-family: var(--extra-font-size-18-semibold);
+}

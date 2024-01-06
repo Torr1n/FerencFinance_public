@@ -1,0 +1,32 @@
+.signincontainer {
+  flex: 1;
+  height: 900px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: var(--padding-38xl) 0px 0px;
+  box-sizing: border-box;
+}
+.signIn100 {
+  background-color: var(--darkish-color-dark-bg);
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+@media screen and (max-width: 960px) {
+  .signincontainer {
+    flex: unset;
+    align-self: stretch;
+  }
+
+  .signIn1 {
+    flex-direction: column;
+    height: auto;
+  }
+}

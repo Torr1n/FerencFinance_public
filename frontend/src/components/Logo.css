@@ -1,0 +1,53 @@
+.signInLogotext {
+  margin: 0;
+  position: relative;
+  font-size: inherit;
+  font-weight: 400;
+  font-family: inherit;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 20px;
+  flex-shrink: 0;
+}
+.signInMinilogo {
+  border-radius: var(--br-5xs);
+  background-color: var(--color-silver);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--padding-11xs) var(--padding-10xs);
+}
+.signInFerencfinance {
+  position: relative;
+  font-size: var(--extra-font-size-18-semibold-size);
+  display: inline-block;
+  font-family: var(--font-poppins);
+  color: var(--text-color-pure-white);
+  text-align: left;
+  width: 142px;
+  height: 23px;
+  flex-shrink: 0;
+}
+.signInLogo {
+  width: 505px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  gap: var(--gap-xs);
+  text-align: center;
+  font-size: var(--font-size-2xl);
+  color: var(--color-black);
+  font-family: var(--font-racing-sans-one);
+}
+
+@media screen and (max-width: 1200px) {
+  .ferencfinance {
+    display: none;
+  }
+}

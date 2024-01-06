@@ -1,0 +1,72 @@
+.transactions {
+  position: relative;
+  font-weight: 600;
+}
+.title {
+  align-self: stretch;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+.ticker {
+  position: relative;
+  font-weight: 600;
+  display: inline-block;
+  width: 200px;
+  flex-shrink: 0;
+}
+.purchasetype {
+  flex: 1;
+  position: relative;
+  font-weight: 600;
+}
+.fieldheaders {
+  width: 290px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+  text-align: right;
+}
+.header {
+  align-self: stretch;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  font-size: var(--font-size-xs);
+  color: var(--text-color-text-3);
+}
+.main {
+  align-self: stretch;
+  height: 175px;
+  overflow-y: auto;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: var(--gap-8xs);
+  font-size: var(--size-14-size-14-medium-size);
+}
+.stocktransactions {
+  align-self: stretch;
+  border-radius: var(--br-3xs);
+  background-color: var(--darkish-color-dark-bg);
+  border: 1px solid var(--darkish-color-dark-2);
+  box-sizing: border-box;
+  height: 289px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: var(--padding-xl) var(--padding-lgi) var(--padding-xl)
+    var(--padding-6xl);
+  gap: var(--gap-xl);
+  text-align: left;
+  font-size: var(--extra-font-size-18-semibold-size);
+  color: var(--text-color-pure-white);
+  font-family: var(--extra-font-size-18-semibold);
+}

@@ -1,0 +1,71 @@
+@import "https://code.highcharts.com/css/highcharts.css";
+
+:root {
+  --highcharts-background-color: var(--darkish-color-dark-bg);
+  --highcharts-neutral-color-100: var(--text-color-text-3);
+  --highcharts-neutral-color-80: var(--text-color-text-3);
+  --highcharts-neutral-color-60: var(--text-color-text-3);
+  --highcharts-neutral-color-20: var(--darkish-color-dark-1);
+  --highcharts-neutral-color-10: var(--darkish-color-dark-1);
+  --highcharts-neutral-color-5: var(--darkish-color-dark-1);
+  --highcharts-neutral-color-3: var(--darkish-color-dark-1);
+  --highcharts-highlight-color-80: #29a073;
+  --highcharts-highlight-color-60: var(--text-color-text-3);
+  --highcharts-highlight-color-20: var(--primary-color);
+  --highcharts-highlight-color-10: var(--primary-color);
+
+  --highcharts-color-0: #fa4b42;
+  --highcharts-color-2: #29a073;
+}
+
+.highcharts-flags-series .highcharts-point text {
+  fill: var(--highcharts-neutral-color-100);
+  font-size: 0.7em;
+  font-weight: bold;
+}
+
+.highcharts-hollowcandlestick-series .highcharts-point-down-bearish-up {
+  fill: #29a073;
+  stroke: #29a073;
+}
+.highcharts-button {
+  fill: var(--darkish-color-dark-2);
+  stroke: var(--darkish-color-dark-2);
+  cursor: default;
+  stroke-width: 1px;
+  transition: fill 250ms;
+}
+
+.highcharts-container {
+  position: relative;
+  overflow: hidden;
+  width: 100% !important;
+  text-align: left;
+  line-height: normal;
+  z-index: 0; /* #1072 */
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  font-family: var(--font-poppins);
+  font-size: 1rem;
+  user-select: none;
+  touch-action: manipulation;
+  outline: none;
+}
+
+.highcharts-credits {
+  cursor: none;
+  fill: var(--darkish-color-dark-bg);
+  font-size: 0;
+  transition: fill 250ms, font-size 250ms;
+}
+
+.xirrgraphIcon {
+  padding: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  border: var(--darkish-color-dark-2) solid;
+  border-radius: 10px;
+  border-width: 1px;
+  align-self: stretch;
+}
