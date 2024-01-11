@@ -20,7 +20,7 @@
 }
 .emaperiods {
   align-self: stretch;
-  height: 421px;
+  height: 370px;
   overflow-y: auto;
   flex-shrink: 0;
   display: flex;

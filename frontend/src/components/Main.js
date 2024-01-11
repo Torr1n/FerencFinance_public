@@ -14,6 +14,7 @@ const Main = ({ onClose }) => {
     mutationFn: addStock,
     onSuccess: (data) => {
       queryClient.invalidateQueries({ queryKey: ["stocks"] });
+      queryClient.invalidateQueries({ queryKey: ["allIdealEMAs"] });
       if (data.errors) {
         setErrorMessage(data.errors[0].detail);
       } else {

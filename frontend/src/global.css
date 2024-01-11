@@ -15,6 +15,7 @@ body {
   margin: 0;
   line-height: normal;
 }
+
 :root {
   /* fonts */
   --extra-font-size-18-semibold: "Kumbh Sans";

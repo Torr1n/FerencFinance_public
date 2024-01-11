@@ -31,6 +31,7 @@ const Navbar = () => {
     mutationFn: deleteStock,
     onSettled: () => {
       queryClient.invalidateQueries({ queryKey: ["stocks"] });
+      queryClient.invalidateQueries({ queryKey: ["allIdealEMAs"] });
     },
   });
 
@@ -38,7 +39,7 @@ const Navbar = () => {
 
   const onDeleteIconClick = (toDeleteId) => {
     if (toDeleteId == id) {
-      navigate(-1);
+      navigate("/");
     }
     const idToken = { id: toDeleteId, token: token.token };
     deleteStockMutation.mutate(idToken);
@@ -63,7 +64,7 @@ const Navbar = () => {
           <div
             className="logo"
             onClick={() => {
-              navigate("/home");
+              navigate("/");
             }}
           >
             <div className="minilogo">

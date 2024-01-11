@@ -27,6 +27,7 @@ class EMA(Model):
     xirr = models.DecimalField(max_digits=10, decimal_places=4, null=True, blank=True)
     profit = models.IntegerField()
     period = models.PositiveIntegerField()
+    cashflows = models.JSONField(null=True)
 
     class Meta:
         verbose_name = "EMA Period"

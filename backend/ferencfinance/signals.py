@@ -8,6 +8,7 @@ from ferencfinance.helpers import (
     generate_signals_and_xirr,
     calculate_profits,
     get_stock_data,
+    update_signals_and_xirr,
 )
 import pandas as pd
 import json
@@ -34,7 +35,6 @@ def update_stock_data_on_create(sender, instance, created, **kwargs):
             emalist = data[["Date", "EMA"]].values.tolist()
             result = generate_signals_and_xirr(data)
             signals, xirr, cash_flows = result
-            print(signals)
             if not xirr:
                 xirr = 0
 
@@ -46,18 +46,41 @@ def update_stock_data_on_create(sender, instance, created, **kwargs):
                 ema=json.dumps(emalist),
                 xirr=xirr,
                 signals=json.dumps(signals),
+                cashflows=json.dumps(cash_flows),
             )
+    else:
+        for emaperiod in instance.ema_set.all():
+            data = pd.DataFrame(
+                json.loads(instance.data),
+                columns=["Date", "Open", "High", "Low", "Close"],
+            )
+            ema = calculate_ema(data, emaperiod.period)
+            data["EMA"] = ema
+            emalist = data[["Date", "EMA"]].values.tolist()
+            emaperiod.ema = json.dumps(emalist)
+            result = update_signals_and_xirr(
+                data, json.loads(emaperiod.signals), json.loads(emaperiod.cashflows)
+            )
+            signals, xirr, cash_flows = result
+            profit = calculate_profits(signals)
+            emaperiod.signals = json.dumps(signals)
+            emaperiod.cashflows = json.dumps(cash_flows)
+            emaperiod.xirr = xirr
+            emaperiod.profit = profit
+
+            emaperiod.save()
 
 
 @receiver(pre_save, sender=Stock)
 def validate_ticker(sender, instance, **kwargs):
-    try:
-        if instance.startDate:
-            instance.data = json.dumps(
-                get_stock_data(instance.ticker, instance.startDate)
-            )
-        else:
-            instance.data = json.dumps(get_stock_data(instance.ticker))
+    if instance.data == None:
+        try:
+            if instance.startDate:
+                instance.data = json.dumps(
+                    get_stock_data(instance.ticker, instance.startDate)
+                )
+            else:
+                instance.data = json.dumps(get_stock_data(instance.ticker))
 
-    except Exception as e:
-        raise ValidationError(f"Invalid ticker: {instance.ticker}, Error: {str(e)}")
+        except Exception as e:
+            raise ValidationError(f"Invalid ticker: {instance.ticker}, Error: {str(e)}")

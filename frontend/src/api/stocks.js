@@ -8,6 +8,37 @@ export async function fetchStocks(token) {
   return response.json();
 }
 
+export async function fetchAllIdealEMAs(token) {
+  const response = await fetch(`http://localhost:8000/all_highest_emas/`, {
+    method: "GET",
+    headers: {
+      Authorization: `Token ${token}`,
+    },
+  });
+  return response.json();
+}
+
+export async function fetchExcelData(token) {
+  const response = await fetch(`http://localhost:8000/stocks_excel_export/`, {
+    method: "GET",
+    headers: {
+      Authorization: `Token ${token}`,
+    },
+  });
+  return response.json();
+}
+
+export async function updateAllStocks(token) {
+  const response = await fetch(`http://localhost:8000/update_all_stocks/`, {
+    method: "POST",
+    headers: {
+      Authorization: `Token ${token}`,
+      "Content-Type": "application/json",
+    },
+  });
+  return response.json();
+}
+
 export async function fetchStock(id, token) {
   const response = await fetch(`http://localhost:8000/stock/${id}`, {
     method: "GET",

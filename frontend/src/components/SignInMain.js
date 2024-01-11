@@ -13,9 +13,10 @@ const SignInMain = () => {
   const loginMutation = useMutation({
     mutationFn: loginUser,
     onSuccess: (data) => {
-      if (data.errors) {
-        console.log(data.errors);
-        setErrorMessage(data.errors[0].detail);
+      console.log(data);
+      if (data.non_field_errors) {
+        console.log(data.non_field_errors[0]);
+        setErrorMessage(data.non_field_errors[0]);
       } else {
         setToken("token", data.token);
         navigate("/");
@@ -36,6 +37,9 @@ const SignInMain = () => {
   };
   return (
     <div className="signInMain">
+      {errorMessage !== "" ? (
+        <div className="errorMessage">Invalid Credentials</div>
+      ) : null}
       <div className="inputsform1">
         <div className="input">
           <div className="emailWrapper">

@@ -1,13 +1,15 @@
-.stockname {
+.stockhomepagename {
   margin: 0;
   position: relative;
   font-size: inherit;
   font-weight: 600;
   font-family: inherit;
+  color: var(--text-color-pure-white);
 }
-.top-bar {
+.top-bar-home {
   display: flex;
   flex-direction: row;
+  padding-bottom: 30px;
   align-items: center;
   justify-content: flex-start;
 }
@@ -15,14 +17,20 @@
   align-self: stretch;
   max-width: 100%;
   overflow: hidden;
-  height: 605px;
+  height: 100%;
   flex-shrink: 0;
   object-fit: cover;
+
+  padding: 5px;
+  border: var(--darkish-color-dark-2) solid;
+  border-radius: 10px;
+  border-width: 1px;
 }
 .excelicon {
+  color: var(--text-color-text-1);
   position: relative;
-  width: 16.7px;
-  height: 16.7px;
+  width: 22px;
+  height: 22px;
 }
 .exceldownload {
   position: relative;
@@ -33,11 +41,11 @@
   text-align: left;
 }
 .dashboarddata,
-.selectedstock {
+.selectedstockhomepage {
   display: flex;
   align-items: center;
 }
-.selectedstock {
+.selectedstockhomepage {
   cursor: pointer;
   border: 0;
   padding: 14px 15px;
@@ -53,26 +61,27 @@
   flex-direction: column;
   justify-content: center;
   gap: 10px;
+  height: 100%;
 }
-.stocks {
+.stockhomepages {
   position: relative;
   font-weight: 600;
 }
-.title {
+.titlehomepage {
   align-self: stretch;
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-evenly;
 }
 .thisweek,
-.ticker {
+.tickerhomepage {
   position: relative;
   font-weight: 600;
 }
-.ticker {
+.tickerhomepage {
   display: inline-block;
-  width: 200px;
+  width: 45px;
   flex-shrink: 0;
 }
 .thisweek {
@@ -85,7 +94,7 @@
   align-items: center;
 }
 .fieldheaders {
-  width: 247px;
+  width: 225px;
   flex-shrink: 0;
   justify-content: flex-end;
   text-align: right;
@@ -101,7 +110,7 @@
   position: relative;
   font-weight: 500;
 }
-.ticker1 {
+.tickerhomepage1 {
   overflow: hidden;
   display: flex;
   flex-direction: row;
@@ -119,10 +128,10 @@
 }
 .profit1,
 .xirr1 {
-  width: 95px;
+  width: 88px;
 }
 .xirr1 {
-  width: 94px;
+  width: 85px;
 }
 .fields {
   margin: 0;
@@ -135,14 +144,39 @@
 }
 .fields,
 .fields1,
-.stock {
+.stockhomepage {
   display: flex;
   flex-direction: row;
 }
-.stock {
+.stockhomepagesell {
+  display: flex;
+  flex-direction: row;
   align-self: stretch;
   border-radius: 8px;
   background-color: red;
+  height: 40px;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 15px 14px 25px;
+  box-sizing: border-box;
+}
+.stockhomepagebuy {
+  display: flex;
+  flex-direction: row;
+  align-self: stretch;
+  border-radius: 8px;
+  background-color: green;
+  height: 40px;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 15px 14px 25px;
+  box-sizing: border-box;
+}
+.stockhomepage {
+  align-self: stretch;
+  border-radius: 8px;
   height: 40px;
   flex-shrink: 0;
   align-items: center;
@@ -156,7 +190,7 @@
   justify-content: flex-start;
   text-align: right;
 }
-.stock1 {
+.stockhomepage1 {
   align-self: stretch;
   border-radius: 8px;
   height: 40px;
@@ -167,8 +201,8 @@
   box-sizing: border-box;
 }
 .fields2,
-.stock1,
-.stock2 {
+.stockhomepage1,
+.stockhomepage2 {
   display: flex;
   flex-direction: row;
 }
@@ -178,7 +212,7 @@
   justify-content: flex-start;
   text-align: right;
 }
-.stock2 {
+.stockhomepage2 {
   align-self: stretch;
   border-radius: 8px;
   background-color: #00ff47;
@@ -190,7 +224,7 @@
   box-sizing: border-box;
 }
 .main,
-.stocktransactions {
+.stockhomepagetransactions {
   align-self: stretch;
   flex-direction: column;
 }
@@ -204,7 +238,7 @@
   gap: 5px;
   font-size: 14px;
 }
-.stocktransactions {
+.stockhomepagetransactions {
   flex: 1;
   border-radius: 10px;
   background-color: #1c1a2e;
@@ -212,37 +246,39 @@
   padding: 20px 19px 20px 0;
   gap: 10px;
 }
-.additionalinfo,
+.additionalinfohomepage,
 .homepage,
-.stockinfo,
-.stocktransactions {
+.stockhomepageinfo,
+.stockhomepagetransactions {
   display: flex;
   align-items: flex-start;
   justify-content: flex-start;
 }
-.additionalinfo {
+.additionalinfohomepage {
   width: 354px;
-  height: 672px;
+  height: 100%;
   flex-direction: column;
   padding: 0 0 39px;
   box-sizing: border-box;
 }
 .homepage,
-.stockinfo {
+.stockhomepageinfo {
   text-align: left;
   color: #fff;
   font-family: "Kumbh Sans";
 }
-.stockinfo {
+.stockhomepageinfo {
   align-self: stretch;
   flex-direction: row;
   gap: 40px;
   font-size: 18px;
+  height: 750px;
 }
 .homepage {
-  width: 1247px;
-  height: 920px;
+  width: 100%;
+  height: 100%;
   overflow-y: auto;
+  background: var(--darkish-color-dark-bg);
   flex-direction: column;
   padding: 35px 45px;
   box-sizing: border-box;
@@ -250,31 +286,30 @@
   color: var(--darkish-color-dark-bg);
   font-size: 25px;
 }
-@media screen and (max-width: 1200px) {
-  .exceldownload {
-    display: none;
-  }
-  .selectedstock {
+@media screen and (max-width: 1660px) {
+  .selectedstockhomepage {
     width: auto;
     align-self: unset;
+    gap: 30px;
   }
   .dashboarddata {
     flex: unset;
     align-self: stretch;
+    padding-bottom: 30px;
   }
-  .additionalinfo {
+  .additionalinfohomepage {
     align-self: stretch;
     width: auto;
   }
-  .stockinfo {
+  .stockhomepageinfo {
     flex-direction: column;
   }
 }
 @media screen and (max-width: 960px) {
-  .stockname {
+  .stockhomepagename {
     display: flex;
   }
-  .additionalinfo {
+  .additionalinfohomepage {
     align-self: stretch;
     width: auto;
   }

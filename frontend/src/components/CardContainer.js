@@ -38,7 +38,7 @@ const CardContainer = ({
     <div className="profitcard" style={profitCardStyle}>
       <div className="icon1">{icon}</div>
       <div className="profit" style={profitStyle}>
-        <div className="profit1" style={profit1Style}>
+        <div className="profitnothome" style={profit1Style}>
           {title}
         </div>
         <b className="value" style={valueStyle}>

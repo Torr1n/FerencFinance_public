@@ -22,14 +22,14 @@ const SelectedStock = () => {
 
   return (
     <Scrollbars style={{ width: "100%", height: "100%" }}>
-      <main className="selectedstock1">
+      <section className="selectedstock1">
         <div className="top-bar">
           <h2 className="stockname5">
             {stock ? stock.attributes.ticker : null}
           </h2>
         </div>
         <StockInfo />
-      </main>
+      </section>
     </Scrollbars>
   );
 };

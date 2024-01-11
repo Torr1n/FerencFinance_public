@@ -30,4 +30,19 @@ urlpatterns += [
         ferencfinance_views.AllEMAPeriodsView.as_view(),
         name="all-ema-periods",
     ),
+    path(
+        "all_highest_emas/",
+        ferencfinance_views.AllStocksHighestProfitEMAView.as_view(),
+        name="all highest emas",
+    ),
+    path(
+        "update_all_stocks/",
+        ferencfinance_views.UpdateAllStocksView.as_view(),
+        name="update all stocks",
+    ),
+    path(
+        "stocks_excel_export/",
+        ferencfinance_views.AllStocksExcelExportView.as_view(),
+        name="stocks_excel_export",
+    ),
 ]

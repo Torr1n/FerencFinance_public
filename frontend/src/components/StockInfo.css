@@ -6,6 +6,7 @@
   justify-content: flex-start;
   gap: var(--gap-21xl);
   text-align: left;
+  height: 100%;
   font-size: var(--size-14-size-14-medium-size);
   color: var(--text-color-text-2);
   font-family: var(--extra-font-size-18-semibold);
