@@ -47,48 +47,47 @@ const HomePage = () => {
 
   const exportFile = useCallback(() => {
     const workbook = new ExcelJS.Workbook();
-    const worksheet = workbook.addWorksheet("Portfolio1");
+    const worksheet = workbook.addWorksheet("Stocks");
     // Add data
     const columns = [];
     for (let i = 0; i < excelData.data.length; i++) {
       columns.push(
         { header: `Ticker`, key: `ticker${i}` },
-        { header: `Price`, key: `profit${i}` },
-        { header: `XIRR`, key: `xirr${i}`, width: 12 },
+        { header: `Price`, key: `profit${i}`, width: 12 },
+        { header: `XIRR`, key: `xirr${i}` },
+        { header: "Period", key: `period${i}` },
         { header: "", key: `${i}` }
       );
     }
     worksheet.columns = columns;
 
-    console.log(worksheet.columns);
     excelData.data.forEach((entry, colIndex) => {
-      console.log(colIndex);
-      const { ticker, profit, xirr, signals } = entry;
+      const { ticker, profit, xirr, period, signals } = entry;
       const col1Head = ["Ticker", ticker, "", "Signal"];
       const col1Body = signals.map((signal) => signal.signal).flat();
       const col1 = [...col1Head, ...col1Body];
-      const col2Head = ["Profit", profit, "", "Price"];
-      const col2Body = signals.map((signal) => signal.price).flat();
+      const col2Head = ["Profit", profit, "", "Date"];
+      const col2Body = signals.map((signal) => new Date(signal.date)).flat();
       const col2 = [...col2Head, ...col2Body];
-      const col3Head = ["XIRR", xirr * 100, "", "Date"];
-      const col3Body = signals.map((signal) => new Date(signal.date)).flat();
+      const col3Head = ["XIRR", xirr * 100, "", "Price"];
+      const col3Body = signals.map((signal) => signal.price).flat();
       const col3 = [...col3Head, ...col3Body];
-      console.log(col1, col2, col3);
+      const col4 = ["Period", period];
 
       // Add stock information to the worksheet
       worksheet.getColumn(`ticker${colIndex}`).values = col1;
       worksheet.getColumn(`profit${colIndex}`).values = col2;
       worksheet.getColumn(`xirr${colIndex}`).values = col3;
+      worksheet.getColumn(`period${colIndex}`).values = col4;
     });
     // Export the workbook to an Excel file
-    console.log(worksheet.columns);
     workbook.xlsx
       .writeBuffer()
       .then((buffer) => {
         const blob = new Blob([buffer], {
           type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
         });
-        FileSaver.saveAs(blob, "portfolio.xlsx");
+        FileSaver.saveAs(blob, "Portfolio.xlsx");
       })
       .catch((err) => {
         console.error("Error creating Excel file:", err);
@@ -173,7 +172,7 @@ const HomePage = () => {
       plotOptions: {
         scatter: {
           marker: {
-            radius: 2.5,
+            radius: 5,
             symbol: "circle",
             states: {
               hover: {

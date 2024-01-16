@@ -38,7 +38,7 @@ const XIRRGraph = () => {
         data: [
           [
             parseFloat((100 * ema.attributes.xirr).toFixed(2)),
-            ema.attributes.profit,
+            parseFloat(ema.attributes.profit),
           ],
         ],
         marker: {
@@ -109,6 +109,8 @@ const XIRRGraph = () => {
       series: series,
     };
   }
+
+  console.log(options);
 
   return (
     <div className="xirrgraphIcon">

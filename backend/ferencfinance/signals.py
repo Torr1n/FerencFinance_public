@@ -34,11 +34,10 @@ def update_stock_data_on_create(sender, instance, created, **kwargs):
             data["EMA"] = ema
             emalist = data[["Date", "EMA"]].values.tolist()
             result = generate_signals_and_xirr(data)
-            signals, xirr, cash_flows = result
+            signals, xirr, cash_flows, profit = result
             if not xirr:
                 xirr = 0
 
-            profit = calculate_profits(signals)
             EMA.objects.create(
                 stock=instance,
                 period=period,
@@ -61,8 +60,7 @@ def update_stock_data_on_create(sender, instance, created, **kwargs):
             result = update_signals_and_xirr(
                 data, json.loads(emaperiod.signals), json.loads(emaperiod.cashflows)
             )
-            signals, xirr, cash_flows = result
-            profit = calculate_profits(signals)
+            signals, xirr, cash_flows, profit = result
             emaperiod.signals = json.dumps(signals)
             emaperiod.cashflows = json.dumps(cash_flows)
             emaperiod.xirr = xirr

@@ -173,6 +173,7 @@ class AllStocksExcelExportView(generics.ListAPIView):
                         "ticker": stock.ticker,
                         "profit": ema.profit,
                         "xirr": ema.xirr,
+                        "period": ema.period,
                         "signals": json.loads(ema.signals),
                     }
                 )

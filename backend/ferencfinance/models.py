@@ -25,7 +25,7 @@ class EMA(Model):
     signals = models.JSONField()
     ema = models.JSONField()
     xirr = models.DecimalField(max_digits=10, decimal_places=4, null=True, blank=True)
-    profit = models.IntegerField()
+    profit = models.DecimalField(max_digits=10, decimal_places=2)
     period = models.PositiveIntegerField()
     cashflows = models.JSONField(null=True)
 

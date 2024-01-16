@@ -39,6 +39,7 @@ def undo_date_conversion(date):
 
 
 def generate_signals_and_xirr(data):
+    lastTransBuy = False
     buying = True
     signals_data = []
     volatility_data = []
@@ -58,7 +59,11 @@ def generate_signals_and_xirr(data):
             volatility_data.append(ln)
 
         if buying and shouldBuy(high, low, close, open, ema_value):
-            signal = {"signal": "Buy", "price": data["Open"].iloc[i], "date": date}
+            signal = {
+                "signal": "Buy",
+                "price": data["Open"].iloc[i],
+                "date": date,
+            }
             signals_data.append(signal)
             cash_flow = {
                 "date": datetime.utcfromtimestamp(date / 1000).date(),
@@ -68,7 +73,11 @@ def generate_signals_and_xirr(data):
             buying = not buying
 
         if (not buying) and shouldSell(high, low, close, open, ema_value):
-            signal = {"signal": "Sell", "price": data["Open"].iloc[i], "date": date}
+            signal = {
+                "signal": "Sell",
+                "price": data["Open"].iloc[i],
+                "date": date,
+            }
             signals_data.append(signal)
             cash_flow = {
                 "date": datetime.utcfromtimestamp(date / 1000).date(),
@@ -78,6 +87,13 @@ def generate_signals_and_xirr(data):
             buying = not buying
 
         if (not buying) and (i == (len(data) - 1)):
+            lastTransBuy = True
+            signal = {
+                "signal": "Sell",
+                "price": data["Open"].iloc[i],
+                "date": date,
+            }
+            signals_data.append(signal)
             cash_flow = {
                 "date": datetime.utcfromtimestamp(date / 1000).date(),
                 "amount": 100 * data["Open"].iloc[i],
@@ -85,13 +101,17 @@ def generate_signals_and_xirr(data):
             cash_flow_data.append(cash_flow)
 
     cash_flows = pd.DataFrame(cash_flow_data)
+    profit = calculate_profits(signals_data)
     if not cash_flows.empty:
         xirr = pyxirr.xirr(cash_flows)
     else:
         xirr = 0
     for cash_flow in cash_flow_data:
         cash_flow["date"] = undo_date_conversion(cash_flow["date"])
-    return signals_data, xirr, cash_flow_data
+    if lastTransBuy:
+        cash_flow_data.pop()
+        signals_data.pop()
+    return signals_data, xirr, cash_flow_data, profit
 
 
 def date_conversion(date):
@@ -99,6 +119,7 @@ def date_conversion(date):
 
 
 def update_signals_and_xirr(data, signals, cashflows):
+    lastTransBuy = False
     buying = True
     if signals[-1]["signal"] == "Buy":
         buying = False
@@ -113,7 +134,11 @@ def update_signals_and_xirr(data, signals, cashflows):
             date = data["Date"].iloc[i]
 
             if buying and shouldBuy(high, low, close, open, ema_value):
-                signal = {"signal": "Buy", "price": data["Open"].iloc[i], "date": date}
+                signal = {
+                    "signal": "Buy",
+                    "price": data["Open"].iloc[i],
+                    "date": date,
+                }
                 signals.append(signal)
                 cash_flow = {
                     "date": date,
@@ -123,7 +148,11 @@ def update_signals_and_xirr(data, signals, cashflows):
                 buying = not buying
 
             if (not buying) and shouldSell(high, low, close, open, ema_value):
-                signal = {"signal": "Sell", "price": data["Open"].iloc[i], "date": date}
+                signal = {
+                    "signal": "Sell",
+                    "price": data["Open"].iloc[i],
+                    "date": date,
+                }
                 signals.append(signal)
                 cash_flow = {
                     "date": date,
@@ -133,12 +162,23 @@ def update_signals_and_xirr(data, signals, cashflows):
                 buying = not buying
 
             if (not buying) and (i == (len(data) - 1)):
+                lastTransBuy = True
+                signal = {
+                    "signal": "Sell",
+                    "price": data["Open"].iloc[i],
+                    "date": date,
+                }
+                signals.append(signal)
                 cash_flow = {
                     "date": date,
                     "amount": 100 * data["Open"].iloc[i],
                 }
                 cashflows.append(cash_flow)
     cash_flow_no_conversion = copy.deepcopy(cashflows)
+    profit = calculate_profits(signals)
+    if lastTransBuy:
+        cash_flow_no_conversion.pop()
+        signals.pop()
     for cash_flow in cashflows:
         cash_flow["date"] = date_conversion(cash_flow["date"])
     cashflowdf = pd.DataFrame(cashflows)
@@ -147,7 +187,7 @@ def update_signals_and_xirr(data, signals, cashflows):
     else:
         xirr = 0
 
-    return signals, xirr, cash_flow_no_conversion
+    return signals, xirr, cash_flow_no_conversion, profit
 
 
 def shouldBuy(high, low, close, open, ema_value):
@@ -167,7 +207,9 @@ def calculate_profits(signals):
         return 0
     buys = signals[signals["signal"] == "Buy"]
     sells = signals[signals["signal"] == "Sell"]
-    profits = sum(sell - buy for buy, sell in zip(buys["price"], sells["price"]))
+    profits = sum(
+        ((sell * 100) - (buy * 100)) for buy, sell in zip(buys["price"], sells["price"])
+    )
     return profits
 
 
