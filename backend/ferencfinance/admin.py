@@ -10,3 +10,8 @@ class StockAdmin(admin.ModelAdmin):
 @admin.register(models.EMA)
 class EMAAdmin(admin.ModelAdmin):
     list_display = ("id", "stock")
+
+
+@admin.register(models.Portfolio)
+class PortfolioAdmin(admin.ModelAdmin):
+    list_display = ("id", "name")

@@ -38,7 +38,7 @@ def undo_date_conversion(date):
     )
 
 
-def generate_signals_and_xirr(data):
+def generate_signals_and_xirr(data, type):
     lastTransBuy = False
     buying = True
     signals_data = []
@@ -58,7 +58,7 @@ def generate_signals_and_xirr(data):
             ln = math.log(nextClose / close)
             volatility_data.append(ln)
 
-        if buying and shouldBuy(high, low, close, open, ema_value):
+        if buying and shouldBuy(type, high, low, close, open, ema_value):
             signal = {
                 "signal": "Buy",
                 "price": data["Open"].iloc[i],
@@ -72,7 +72,7 @@ def generate_signals_and_xirr(data):
             cash_flow_data.append(cash_flow)
             buying = not buying
 
-        if (not buying) and shouldSell(high, low, close, open, ema_value):
+        if (not buying) and shouldSell(type, high, low, close, open, ema_value):
             signal = {
                 "signal": "Sell",
                 "price": data["Open"].iloc[i],
@@ -118,7 +118,7 @@ def date_conversion(date):
     return datetime.utcfromtimestamp(date / 1000).date()
 
 
-def update_signals_and_xirr(data, signals, cashflows):
+def update_signals_and_xirr(type, data, signals, cashflows):
     lastTransBuy = False
     buying = True
     if signals[-1]["signal"] == "Buy":
@@ -133,7 +133,7 @@ def update_signals_and_xirr(data, signals, cashflows):
             ema_value = data["EMA"].iloc[i - 1]
             date = data["Date"].iloc[i]
 
-            if buying and shouldBuy(high, low, close, open, ema_value):
+            if buying and shouldBuy(type, high, low, close, open, ema_value):
                 signal = {
                     "signal": "Buy",
                     "price": data["Open"].iloc[i],
@@ -147,7 +147,7 @@ def update_signals_and_xirr(data, signals, cashflows):
                 cashflows.append(cash_flow)
                 buying = not buying
 
-            if (not buying) and shouldSell(high, low, close, open, ema_value):
+            if (not buying) and shouldSell(type, high, low, close, open, ema_value):
                 signal = {
                     "signal": "Sell",
                     "price": data["Open"].iloc[i],
@@ -190,15 +190,22 @@ def update_signals_and_xirr(data, signals, cashflows):
     return signals, xirr, cash_flow_no_conversion, profit
 
 
-def shouldBuy(high, low, close, open, ema_value):
-    candlePercent = (high - ema_value) / (high - low)
-    return (close > open) and (close > ema_value) and (candlePercent > 0.5)
+def shouldBuy(type, high, low, close, open, ema_value):
+    if type == "Long":
+        candlePercent = (high - ema_value) / (high - low)
+        return (close > open) and (close > ema_value) and (candlePercent > 0.5)
+    else:
+        candleIndicator = ((high + low) / 2) < ema_value
+        return (close < open) and (close < ema_value) and candleIndicator
 
 
-# true if meets sell condition
-def shouldSell(high, low, close, open, ema_value):
-    candlePercent = (ema_value - low) / (high - low)
-    return (close < open) and (close < ema_value) and (candlePercent > 0.5)
+def shouldSell(type, high, low, close, open, ema_value):
+    if type == "Long":
+        candlePercent = (ema_value - low) / (high - low)
+        return (close < open) and (close < ema_value) and (candlePercent > 0.5)
+    else:
+        candleIndicator = ((high + low) / 2) > ema_value
+        return (close > open) and (close > ema_value) and candleIndicator
 
 
 def calculate_profits(signals):

@@ -229,8 +229,6 @@
   flex-direction: column;
 }
 .main {
-  height: 175px;
-  overflow-y: auto;
   flex-shrink: 0;
   display: flex;
   align-items: flex-start;
@@ -277,7 +275,6 @@
 .homepage {
   width: 100%;
   height: 100%;
-  overflow-y: auto;
   background: var(--darkish-color-dark-bg);
   flex-direction: column;
   padding: 35px 45px;

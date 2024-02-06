@@ -2,9 +2,12 @@ import "./EMAPeriod.css";
 import { useParams, Link } from "react-router-dom";
 
 const EMAPeriod = ({ emaPeriod, xirr = "None", profit, EMAid }) => {
-  const { id, period } = useParams();
+  const { id, period, portfolio } = useParams();
   return (
-    <Link to={`/${id}/${EMAid}`} style={{ textDecoration: "none" }}>
+    <Link
+      to={`/${portfolio}/${id}/${EMAid}`}
+      style={{ textDecoration: "none" }}
+    >
       <div className="emaperiod">
         <div className="periodinfo">
           <div className="xirrAndPeriod">

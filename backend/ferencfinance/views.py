@@ -2,11 +2,12 @@ from datetime import datetime, date, timedelta
 from json import JSONDecodeError
 import json
 from django.http import JsonResponse
+from django.shortcuts import get_object_or_404
 from django.views import View
 import pandas as pd
 from ferencfinance.helpers import update_stock_data
-from .serializers import EMASerializer, StockSerializer
-from .models import Stock, EMA
+from .serializers import EMASerializer, StockSerializer, PortfolioSerializer
+from .models import Stock, EMA, Portfolio
 from rest_framework.parsers import JSONParser
 from rest_framework.permissions import IsAuthenticated
 from rest_framework import viewsets, status, generics
@@ -41,12 +42,12 @@ class StockViewSet(
         """
         response = JsonResponse({"message": "Preflight request handled successfully"})
         response["Access-Control-Allow-Origin"] = "*"  # Set CORS headers
-        response[
-            "Access-Control-Allow-Methods"
-        ] = "GET, POST, DELETE, OPTIONS"  # Set allowed methods
-        response[
-            "Access-Control-Allow-Headers"
-        ] = "Content-Type, Authorization"  # Set allowed headers
+        response["Access-Control-Allow-Methods"] = (
+            "GET, POST, DELETE, OPTIONS"  # Set allowed methods
+        )
+        response["Access-Control-Allow-Headers"] = (
+            "Content-Type, Authorization"  # Set allowed headers
+        )
         return response
 
     def create(self, request, *args, **kwargs):
@@ -77,13 +78,34 @@ class HighestProfitEMAView(generics.RetrieveAPIView):
     permission_classes = (IsAuthenticated,)
 
     def retrieve(self, request, stock_id, *args, **kwargs):
-        ema = EMA.objects.filter(stock_id=stock_id).order_by("-profit").first()
+        stock = get_object_or_404(Stock, id=stock_id)
+
+        if stock.portfolio.type == "Long":
+            ema = EMA.objects.filter(stock=stock).order_by("-profit").first()
+        else:
+            ema = EMA.objects.filter(stock=stock).order_by("profit").first()
 
         if ema is None:
             return Response({"detail": "No EMAs found for this stock."}, status=404)
 
         serializer = self.get_serializer(ema)
         return Response(serializer.data)
+
+
+class PortfolioViewSet(
+    ListModelMixin,
+    RetrieveModelMixin,
+    CreateModelMixin,
+    DestroyModelMixin,
+    viewsets.GenericViewSet,
+):
+    """
+    A simple ViewSet for listing or retrieving Portfolios.
+    """
+
+    permission_classes = (IsAuthenticated,)
+    queryset = Portfolio.objects.all()
+    serializer_class = PortfolioSerializer
 
 
 class AllEMAPeriodsView(generics.ListAPIView):
@@ -99,22 +121,23 @@ class AllStocksHighestProfitEMAView(generics.ListAPIView):
     serializer_class = EMASerializer
     permission_classes = (IsAuthenticated,)
 
-    def list(self, request, *args, **kwargs):
-        stocks = Stock.objects.all()
+    def list(self, request, portfolio_id, *args, **kwargs):
+        portfolio = get_object_or_404(Portfolio, id=portfolio_id)
+
+        stocks = Stock.objects.filter(portfolio_id=portfolio_id)
         data = []
 
         for stock in stocks:
             stockdata = json.loads(stock.data)
-
-            ema = EMA.objects.filter(stock=stock).order_by("-profit").first()
+            if portfolio.type == "Long":
+                ema = EMA.objects.filter(stock=stock).order_by("-profit").first()
+            else:
+                ema = EMA.objects.filter(stock=stock).order_by("profit").first()
             if ema is not None:
                 signals = json.loads(ema.signals)
-                print(signals[-1])
-                print(stockdata[-1])
 
                 most_recent_signal = signals[-1]
                 most_recent_data = stockdata[-1]
-                print(most_recent_data[0])
 
                 if most_recent_signal is not None:
                     most_recent_date = datetime.utcfromtimestamp(
@@ -140,7 +163,6 @@ class AllStocksHighestProfitEMAView(generics.ListAPIView):
                     ):
                         recent_trans = "Sell"
 
-                print(recent_trans)
                 serializer = self.get_serializer(ema)
                 data.append(
                     {
@@ -156,16 +178,34 @@ class AllStocksHighestProfitEMAView(generics.ListAPIView):
         return Response(data)
 
 
+class PortfolioStocksView(generics.ListAPIView):
+    """
+    A view to retrieve all stocks associated with a specific portfolio.
+    """
+
+    permission_classes = (IsAuthenticated,)
+    serializer_class = StockSerializer
+
+    def get_queryset(self):
+        portfolio_id = self.kwargs["portfolio_id"]
+        return Stock.objects.filter(portfolio_id=portfolio_id)
+
+
 class AllStocksExcelExportView(generics.ListAPIView):
     serializer_class = EMASerializer
     permission_classes = (IsAuthenticated,)
 
-    def list(self, request, *args, **kwargs):
-        stocks = Stock.objects.all()
+    def list(self, request, portfolio_id, *args, **kwargs):
+        portfolio = get_object_or_404(Portfolio, id=portfolio_id)
+
+        stocks = Stock.objects.filter(portfolio_id=portfolio_id)
         data = []
 
         for stock in stocks:
-            ema = EMA.objects.filter(stock=stock).order_by("-profit").first()
+            if portfolio.type == "Long":
+                ema = EMA.objects.filter(stock=stock).order_by("-profit").first()
+            else:
+                ema = EMA.objects.filter(stock=stock).order_by("profit").first()
             if ema is not None:
                 serializer = self.get_serializer(ema)
                 data.append(

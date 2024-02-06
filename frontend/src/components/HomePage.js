@@ -6,17 +6,19 @@ import { useQuery } from "@tanstack/react-query";
 import {
   fetchAllIdealEMAs,
   fetchExcelData,
+  fetchPortfolio,
   updateAllStocks,
 } from "../api/stocks.js";
 import { useEffect, useCallback } from "react";
 import { useCookies } from "react-cookie";
 import { Scrollbars } from "react-custom-scrollbars-2";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import ExcelJS from "exceljs";
 import * as FileSaver from "file-saver";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 const HomePage = () => {
+  const { portfolio } = useParams();
   const [token, setToken] = useCookies(["token"]);
   const naviagte = useNavigate();
   if (!token) {
@@ -28,7 +30,9 @@ const HomePage = () => {
     mutationFn: updateAllStocks,
     onSuccess: (data) => {
       queryClient.invalidateQueries({ queryKey: ["stocks"] });
+      queryClient.invalidateQueries({ queryKey: ["portfoliostocks"] });
       queryClient.invalidateQueries({ queryKey: ["allIdealEMAs"] });
+      queryClient.invalidateQueries({ queryKey: ["ExcelData"] });
     },
   });
   useEffect(() => {
@@ -37,12 +41,17 @@ const HomePage = () => {
 
   const { data: stocks } = useQuery({
     queryKey: ["allIdealEMAs"],
-    queryFn: () => fetchAllIdealEMAs(token.token),
+    queryFn: () => fetchAllIdealEMAs(portfolio, token.token),
+  });
+
+  const { data: portfolioData } = useQuery({
+    queryKey: ["portfolio"],
+    queryFn: () => fetchPortfolio(portfolio, token.token),
   });
 
   const { data: excelData } = useQuery({
     queryKey: ["ExcelData"],
-    queryFn: () => fetchExcelData(token.token),
+    queryFn: () => fetchExcelData(portfolio, token.token),
   });
 
   const exportFile = useCallback(() => {
@@ -199,10 +208,27 @@ const HomePage = () => {
     };
   }
   return (
-    <Scrollbars style={{ width: "100%", height: "100%" }}>
+    <Scrollbars
+      style={{ width: "100%", height: "100%", background: "#1c1a2e" }}
+    >
       <main className="homepage">
         <div className="top-bar-home">
-          <h2 className="stockhomepagename">Portfolio Overview</h2>
+          <h2 className="stockhomepagename">
+            Portfolio Overview:{" "}
+            {portfolioData ? portfolioData.data.attributes.name : ""} - &nbsp;
+          </h2>
+          <h2
+            className="stockhomepagename"
+            style={
+              portfolioData
+                ? portfolioData.data.attributes.type == "Short"
+                  ? { color: "red" }
+                  : { color: "green" }
+                : null
+            }
+          >
+            {portfolioData ? portfolioData.data.attributes.type : ""}
+          </h2>
         </div>
         <section className="stockhomepageinfo">
           <div className="dashboarddata">
@@ -233,26 +259,36 @@ const HomePage = () => {
                   <div className="thisweek">XIRR</div>
                 </div>
               </div>
-              <div className="main">
-                {stocks
-                  ? stocks.data.map((stock) => (
-                      <div className={stockClassName(stock.recent_trans)}>
-                        <div className="tickerhomepage1">
-                          <div className="tto">{stock.stock_ticker}</div>
+              <Scrollbars
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  minHeight: "150px",
+                }}
+              >
+                <div className="main">
+                  {stocks
+                    ? stocks.data.map((stock) => (
+                        <div className={stockClassName(stock.recent_trans)}>
+                          <div className="tickerhomepage1">
+                            <div className="tto">{stock.stock_ticker}</div>
+                          </div>
+                          <nav className="fields">
+                            <div className="thisweek1">
+                              {stock.recent_trans}
+                            </div>
+                            <div className="profit1">
+                              ${stock.ema_period.profit}
+                            </div>
+                            <div className="xirr1">
+                              {(stock.ema_period.xirr * 100).toFixed(2)}%
+                            </div>
+                          </nav>
                         </div>
-                        <nav className="fields">
-                          <div className="thisweek1">{stock.recent_trans}</div>
-                          <div className="profit1">
-                            ${stock.ema_period.profit}
-                          </div>
-                          <div className="xirr1">
-                            {(stock.ema_period.xirr * 100).toFixed(2)}%
-                          </div>
-                        </nav>
-                      </div>
-                    ))
-                  : null}
-              </div>
+                      ))
+                    : null}
+                </div>
+              </Scrollbars>
             </div>
           </div>
         </section>

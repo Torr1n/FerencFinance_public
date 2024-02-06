@@ -1,0 +1,19 @@
+.AddPortfolio {
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: var(--gap-6xl);
+  text-align: left;
+  font-size: var(--font-size-11xl);
+  color: var(--text-color-pure-white);
+  font-family: var(--extra-font-size-18-semibold);
+}
+
+@media screen and (max-width: 960px) {
+  .AddPortfolio {
+    align-self: stretch;
+    width: auto;
+  }
+}

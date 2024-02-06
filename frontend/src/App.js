@@ -11,6 +11,7 @@ import Navbar from "./components/NavBar";
 import SelectedStock from "./components/SelectedStock";
 import SignIn from "./components/SignIn";
 import HomePage from "./components/HomePage";
+import Portfolios from "./components/Portfolios";
 import { CookiesProvider } from "react-cookie";
 
 const queryClient = new QueryClient();
@@ -22,7 +23,8 @@ function App() {
         <BrowserRouter>
           <Routes>
             <Route path="/login" element={<SignIn />} />
-            <Route path="/" element={<Navbar />}>
+            <Route path="/" element={<Portfolios />} />
+            <Route path="/:portfolio" element={<Navbar />}>
               <Route index element={<HomePage />} />
               <Route path=":id" element={<SelectedStock />} />
               <Route path=":id/:period" element={<SelectedStock />} />

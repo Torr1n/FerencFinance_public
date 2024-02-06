@@ -3,9 +3,11 @@ import "./Main.css";
 import { addStock } from "../api/stocks";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useCookies } from "react-cookie";
+import { useParams } from "react-router-dom";
 
 const Main = ({ onClose }) => {
   const [token, setToken] = useCookies(["token"]);
+  const { portfolio } = useParams();
 
   const queryClient = useQueryClient();
   const [errorMessage, setErrorMessage] = useState("");
@@ -15,6 +17,8 @@ const Main = ({ onClose }) => {
     onSuccess: (data) => {
       queryClient.invalidateQueries({ queryKey: ["stocks"] });
       queryClient.invalidateQueries({ queryKey: ["allIdealEMAs"] });
+      queryClient.invalidateQueries({ queryKey: ["ExcelData"] });
+      queryClient.invalidateQueries({ queryKey: ["portfoliostocks"] });
       if (data.errors) {
         setErrorMessage(data.errors[0].detail);
       } else {
@@ -27,6 +31,7 @@ const Main = ({ onClose }) => {
     const body = {
       ticker: ticker.toUpperCase(),
       startDate: date,
+      portfolio_id: portfolio,
     };
     const bodyToken = { body, token };
     addStockMutation.mutate(bodyToken);

@@ -44,7 +44,7 @@ const StockTransactions = () => {
             <div className="purchasetype">DATE</div>
           </div>
         </div>
-        <div className="main">
+        <div className="mainTrans">
           <Scrollbars style={{ width: "100%", height: "100%" }}>
             {EMA
               ? JSON.parse(EMA.data.attributes.signals).map(

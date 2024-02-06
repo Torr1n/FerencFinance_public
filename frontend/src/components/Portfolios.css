@@ -1,0 +1,125 @@
+.ferenc-finance-title,
+.minilogo1 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.ferenc-finance-title {
+  margin: 0;
+  flex: 1;
+  position: relative;
+  font-size: inherit;
+  font-weight: 400;
+  font-family: inherit;
+  white-space: nowrap;
+}
+.minilogo1 {
+  height: 24px;
+  border-radius: 8px;
+  background-color: #c4c4c4;
+  overflow: hidden;
+  flex-direction: column;
+  padding: 2px 3px;
+  box-sizing: border-box;
+}
+.ferencfinance1 {
+  position: relative;
+  font-size: 18px;
+  font-family: Poppins;
+  color: #fff;
+  text-align: left;
+}
+.logo1 {
+  align-self: stretch;
+  height: 31px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 12px;
+  text-align: center;
+  font-size: 21px;
+  color: #000;
+  font-family: "Racing Sans One";
+}
+.portfolios {
+  position: relative;
+}
+.title1 {
+  align-self: stretch;
+  height: 31px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+.addicon1 {
+  width: 30px;
+  height: 30px;
+  position: relative;
+  object-fit: cover;
+}
+.addportfolio {
+  height: 191px;
+  width: 200px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 15px;
+  box-sizing: border-box;
+}
+.homepage1,
+.page,
+.portfolios1 {
+  display: flex;
+  align-items: flex-start;
+}
+.portfolios1 {
+  align-self: stretch;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 40px;
+  min-height: 728px;
+}
+.homepage1,
+.page {
+  justify-content: flex-start;
+}
+.page {
+  flex: 1;
+  overflow-y: auto;
+  flex-direction: column;
+  padding: 35px 45px;
+  box-sizing: border-box;
+  gap: 30px;
+  max-width: 100%;
+  text-align: left;
+  font-size: 18px;
+  color: #fff;
+  font-family: Poppins;
+}
+.homepage1 {
+  width: 100%;
+  position: relative;
+  background-color: #1c1a2e;
+  overflow: hidden;
+  flex-direction: row;
+  letter-spacing: normal;
+}
+@media screen and (max-width: 750px) {
+  .page {
+    gap: 30px;
+    padding: 23px 22px;
+    box-sizing: border-box;
+  }
+}
+@media screen and (max-width: 675px) {
+  .portfolios1 {
+    gap: 40px;
+  }
+}

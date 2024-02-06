@@ -1,0 +1,35 @@
+.AddPortfoliocontainer {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: var(--padding-38xl) 0px 0px;
+}
+.addthestock {
+  background-color: var(--darkish-color-dark-bg);
+  width: 505px;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  max-width: 100%;
+  max-height: 100%;
+  border: var(--text-color-text-3) solid;
+  border-radius: 10px;
+  border-width: 1px;
+}
+
+@media screen and (max-width: 960px) {
+  .AddPortfoliocontainer {
+    flex: unset;
+    align-self: stretch;
+  }
+
+  .addthestock {
+    flex-direction: column;
+    height: auto;
+  }
+}

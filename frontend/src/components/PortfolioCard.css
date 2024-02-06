@@ -1,0 +1,51 @@
+.deleteiconCard {
+  width: 24px;
+  height: 24px;
+  object-fit: cover;
+  cursor: pointer;
+}
+.deleteiconCard,
+.portfolionameCard {
+  position: relative;
+}
+.portfoliotriggersCard,
+.portfoliotypeCard {
+  position: relative;
+  color: #fff;
+}
+.portfolioCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+.iconCard {
+  height: 42px;
+  width: 42px;
+  position: relative;
+  object-fit: cover;
+}
+.portfolioinfoCard {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+}
+.portfoliocardCard {
+  height: 191px;
+  border-radius: 10px;
+  background-color: #282541;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 24px 22px 24px 20px;
+  box-sizing: border-box;
+  gap: 15px;
+  text-align: center;
+  font-size: 14px;
+  color: #929eae;
+  font-family: "Kumbh Sans";
+}

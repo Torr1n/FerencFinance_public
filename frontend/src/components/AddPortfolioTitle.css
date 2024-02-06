@@ -1,0 +1,26 @@
+.addAStock1 {
+  margin: 0;
+  align-self: stretch;
+  position: relative;
+  font-size: inherit;
+  font-weight: 600;
+  font-family: inherit;
+}
+.pleaseProvideThe1 {
+  align-self: stretch;
+  position: relative;
+  font-size: var(--size-16-size-16-regular-size);
+  color: var(--text-color-text-3);
+}
+.titleaddstock {
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: var(--gap-5xs);
+  text-align: left;
+  font-size: var(--font-size-11xl);
+  color: var(--text-color-pure-white);
+  font-family: var(--extra-font-size-18-semibold);
+}

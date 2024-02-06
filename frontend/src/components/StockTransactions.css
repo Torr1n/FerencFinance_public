@@ -39,9 +39,9 @@
   font-size: var(--font-size-xs);
   color: var(--text-color-text-3);
 }
-.main {
+.mainTrans {
   align-self: stretch;
-  height: 175px;
+  height: 170px;
   overflow-y: auto;
   flex-shrink: 0;
   display: flex;

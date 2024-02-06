@@ -8,8 +8,8 @@ export async function fetchStocks(token) {
   return response.json();
 }
 
-export async function fetchAllIdealEMAs(token) {
-  const response = await fetch(`http://localhost:8000/all_highest_emas/`, {
+export async function fetchPortfolios(token) {
+  const response = await fetch("http://localhost:8000/portfolio/", {
     method: "GET",
     headers: {
       Authorization: `Token ${token}`,
@@ -18,13 +18,49 @@ export async function fetchAllIdealEMAs(token) {
   return response.json();
 }
 
-export async function fetchExcelData(token) {
-  const response = await fetch(`http://localhost:8000/stocks_excel_export/`, {
+export async function fetchPortfolio(id, token) {
+  const response = await fetch(`http://localhost:8000/portfolio/${id}`, {
     method: "GET",
     headers: {
       Authorization: `Token ${token}`,
     },
   });
+  return response.json();
+}
+
+export async function fetchPortfolioStocks(id, token) {
+  const response = await fetch(`http://localhost:8000/${id}/stocks/`, {
+    method: "GET",
+    headers: {
+      Authorization: `Token ${token}`,
+    },
+  });
+  return response.json();
+}
+
+export async function fetchAllIdealEMAs(id, token) {
+  const response = await fetch(
+    `http://localhost:8000/${id}/all_highest_emas/`,
+    {
+      method: "GET",
+      headers: {
+        Authorization: `Token ${token}`,
+      },
+    }
+  );
+  return response.json();
+}
+
+export async function fetchExcelData(id, token) {
+  const response = await fetch(
+    `http://localhost:8000/${id}/stocks_excel_export/`,
+    {
+      method: "GET",
+      headers: {
+        Authorization: `Token ${token}`,
+      },
+    }
+  );
   return response.json();
 }
 
@@ -82,6 +118,19 @@ export async function deleteStock(idToken) {
   return response.json();
 }
 
+export async function deletePortfolio(idToken) {
+  const response = await fetch(
+    `http://localhost:8000/portfolio/${idToken.id}/`,
+    {
+      method: "DELETE",
+      headers: {
+        Authorization: `Token ${idToken.token}`,
+      },
+    }
+  );
+  return response.json();
+}
+
 export async function fetchEMA(id, token) {
   if (id) {
     const response = await fetch(`http://localhost:8000/ema/${id}`, {
@@ -106,6 +155,20 @@ export async function addStock(bodyToken) {
       "Content-Type": "application/json",
     },
     body: JSON.stringify(stockBody),
+  });
+  return response.json();
+}
+
+export async function addPortfolio(bodyToken) {
+  const portfolioBody = bodyToken.body;
+  const token = bodyToken.token;
+  const response = await fetch(`http://localhost:8000/portfolio/`, {
+    method: "POST",
+    headers: {
+      Authorization: `Token ${token.token}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(portfolioBody),
   });
   return response.json();
 }

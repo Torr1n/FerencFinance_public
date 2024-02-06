@@ -2,7 +2,7 @@ import { useState, useCallback } from "react";
 import AddStock from "./AddStock";
 import PortalPopup from "./PortalPopup";
 import "./NavBar.css";
-import { fetchStocks, deleteStock } from "../api/stocks.js";
+import { fetchPortfolioStocks, deleteStock } from "../api/stocks.js";
 import { useQuery } from "@tanstack/react-query";
 import { CgAlignBottom, CgAddR, CgTrash, CgLogOut } from "react-icons/cg";
 import {
@@ -20,10 +20,12 @@ const Navbar = () => {
   const [token, setToken] = useCookies(["token"]);
   const location = useLocation();
   const navigate = useNavigate();
-  const id = location.pathname.split("/")[1];
+  const portfolioId = location.pathname.split("/")[1];
+  const stockId = location.pathname.split("/")[2];
+  console.log(portfolioId, stockId);
   const { data: stocks } = useQuery({
-    queryKey: ["stocks"],
-    queryFn: () => fetchStocks(token.token),
+    queryKey: ["portfoliostocks"],
+    queryFn: () => fetchPortfolioStocks(portfolioId, token.token),
   });
   const queryClient = useQueryClient();
 
@@ -31,6 +33,7 @@ const Navbar = () => {
     mutationFn: deleteStock,
     onSettled: () => {
       queryClient.invalidateQueries({ queryKey: ["stocks"] });
+      queryClient.invalidateQueries({ queryKey: ["portfoliostocks"] });
       queryClient.invalidateQueries({ queryKey: ["allIdealEMAs"] });
     },
   });
@@ -38,7 +41,7 @@ const Navbar = () => {
   const [isAddStockPopupOpen, setAddStockPopupOpen] = useState(false);
 
   const onDeleteIconClick = (toDeleteId) => {
-    if (toDeleteId == id) {
+    if (toDeleteId == stockId) {
       navigate("/");
     }
     const idToken = { id: toDeleteId, token: token.token };
@@ -64,7 +67,11 @@ const Navbar = () => {
           <div
             className="logo"
             onClick={() => {
-              navigate("/");
+              if (stockId && portfolioId) {
+                navigate(`/${portfolioId}`);
+              } else {
+                navigate("/");
+              }
             }}
           >
             <div className="minilogo">
@@ -80,7 +87,7 @@ const Navbar = () => {
                       <button
                         key={stock.id}
                         className={
-                          new RegExp(`^/${stock.id}(\/.*)?$`).test(
+                          new RegExp(`^\/[0-9a-f-]+\/${stock.id}(\/.*)?$`).test(
                             location.pathname
                           )
                             ? "selectedstock"
@@ -88,16 +95,16 @@ const Navbar = () => {
                         }
                       >
                         <Link
-                          to={`/${stock.id}`}
+                          to={`${stock.id}`}
                           key={stock.id}
                           className="navlink"
                           style={{ textDecoration: "none" }}
                         >
                           <div
                             className={
-                              new RegExp(`^/${stock.id}(\/.*)?$`).test(
-                                location.pathname
-                              )
+                              new RegExp(
+                                `^\/[0-9a-f-]+\/${stock.id}(\/.*)?$`
+                              ).test(location.pathname)
                                 ? "activeicon"
                                 : "inactiveicon"
                             }
@@ -106,9 +113,9 @@ const Navbar = () => {
                           </div>
                           <div
                             className={
-                              new RegExp(`^/${stock.id}(\/.*)?$`).test(
-                                location.pathname
-                              )
+                              new RegExp(
+                                `^^\/[0-9a-f-]+\/${stock.id}(\/.*)?$`
+                              ).test(location.pathname)
                                 ? "selectedstockname"
                                 : "stockname"
                             }
@@ -119,9 +126,9 @@ const Navbar = () => {
                         </Link>
                         <div
                           className={
-                            new RegExp(`^/${stock.id}(\/.*)?$`).test(
-                              location.pathname
-                            )
+                            new RegExp(
+                              `^\/[0-9a-f-]+\/${stock.id}(\/.*)?$`
+                            ).test(location.pathname)
                               ? "activeicon"
                               : "inactiveicon"
                           }

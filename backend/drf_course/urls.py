@@ -13,6 +13,9 @@ router.register(r"item", ecommerce_views.ItemViewSet, basename="item")
 router.register(r"order", ecommerce_views.OrderViewSet, basename="order")
 router.register(r"stock", ferencfinance_views.StockViewSet, basename="stock")
 router.register(r"ema", ferencfinance_views.EMAViewSet, basename="ema")
+router.register(
+    r"portfolio", ferencfinance_views.PortfolioViewSet, basename="portfolio"
+)
 
 urlpatterns = router.urls
 
@@ -31,7 +34,7 @@ urlpatterns += [
         name="all-ema-periods",
     ),
     path(
-        "all_highest_emas/",
+        "<uuid:portfolio_id>/all_highest_emas/",
         ferencfinance_views.AllStocksHighestProfitEMAView.as_view(),
         name="all highest emas",
     ),
@@ -41,8 +44,13 @@ urlpatterns += [
         name="update all stocks",
     ),
     path(
-        "stocks_excel_export/",
+        "<uuid:portfolio_id>/stocks_excel_export/",
         ferencfinance_views.AllStocksExcelExportView.as_view(),
         name="stocks_excel_export",
+    ),
+    path(
+        "<uuid:portfolio_id>/stocks/",
+        ferencfinance_views.PortfolioStocksView.as_view(),
+        name="portfolio-stocks",
     ),
 ]
