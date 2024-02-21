@@ -9,9 +9,7 @@ import copy
 
 def get_stock_data(ticker, startdate=None):
     if startdate:
-        stock_data = yf.download(
-            ticker, start=startdate, interval="1wk", end="2022-01-01"
-        )
+        stock_data = yf.download(ticker, start=startdate, interval="1wk")
     else:
         stock_data = yf.download(ticker, interval="1wk")
 
