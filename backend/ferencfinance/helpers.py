@@ -9,7 +9,9 @@ import copy
 
 def get_stock_data(ticker, startdate=None):
     if startdate:
-        stock_data = yf.download(ticker, start=startdate, interval="1wk")
+        stock_data = yf.download(
+            ticker, start=startdate, interval="1wk", end="2022-01-01"
+        )
     else:
         stock_data = yf.download(ticker, interval="1wk")
 
@@ -121,9 +123,12 @@ def date_conversion(date):
 def update_signals_and_xirr(type, data, signals, cashflows):
     lastTransBuy = False
     buying = True
-    if signals[-1]["signal"] == "Buy":
-        buying = False
-    start_index = data.index[data["Date"] == signals[-1]["date"]].tolist()
+    if signals:
+        if signals[-1]["signal"] == "Buy":
+            buying = False
+        start_index = data.index[data["Date"] == signals[-1]["date"]].tolist()
+    else:
+        start_index = [1, 1]
     if start_index:
         for i in range(start_index[0], len(data)):
             high = data["High"].iloc[i - 1]
@@ -220,37 +225,52 @@ def calculate_profits(signals):
     return profits
 
 
-def update_stock_data(ticker, stockdata):
+def update_stock_data(ticker, stockdata, startdate):
     # Find the last date in the existing stock data
     lastdate = pd.to_datetime(stockdata["Date"], unit="ms").max()
-    if datetime.now() >= (lastdate + timedelta(days=7)):
-        # Get the new data beyond the last date
-        new_data = yf.download(ticker, start=lastdate, interval="1wk")
-        if not new_data.empty:
-            selected_columns = ["Open", "High", "Low", "Close"]
-            if "Date" in new_data.index.names:
-                new_data.reset_index(inplace=True)
+    if datetime.now() >= (lastdate + timedelta(days=5)):
+        stock_data = yf.download(ticker, start=startdate, interval="1wk")
+        selected_columns = ["Open", "High", "Low", "Close"]
+        if "Date" in stock_data.index.names:
+            stock_data.reset_index(inplace=True)
 
-            # Convert the 'Date' column to Unix timestamps
-            new_data["Date"] = (
-                new_data["Date"] - pd.Timestamp("1970-01-01")
-            ) // pd.Timedelta("1ms")
+        # Convert the 'Date' column to Unix timestamps
+        stock_data["Date"] = (
+            stock_data["Date"] - pd.Timestamp("1970-01-01")
+        ) // pd.Timedelta("1ms")
 
-            formatted_data = new_data.reset_index()[
-                ["Date"] + selected_columns
-            ].values.tolist()
+        return stock_data.reset_index()[["Date"] + selected_columns].values.tolist()
+        # print(datetime.now())
+        # print(lastdate)
+        # print(lastdate + timedelta(days=7))
+        # # Get the new data beyond the last date
+        # new_data = yf.download(ticker, start=lastdate, interval="1wk")
+        # print(new_data)
+        # if not new_data.empty:
+        #     selected_columns = ["Open", "High", "Low", "Close"]
+        #     if "Date" in new_data.index.names:
+        #         new_data.reset_index(inplace=True)
 
-            # If there is new data, append it to the existing stock data
-            stockdata = pd.concat(
-                [
-                    stockdata,
-                    pd.DataFrame(
-                        formatted_data, columns=["Date", "Open", "High", "Low", "Close"]
-                    ),
-                ]
-            )
-            return stockdata.reset_index()[["Date"] + selected_columns].values.tolist()
-        else:
-            return None
+        #     # Convert the 'Date' column to Unix timestamps
+        #     new_data["Date"] = (
+        #         new_data["Date"] - pd.Timestamp("1970-01-01")
+        #     ) // pd.Timedelta("1ms")
+
+        #     formatted_data = new_data.reset_index()[
+        #         ["Date"] + selected_columns
+        #     ].values.tolist()
+
+        #     # If there is new data, append it to the existing stock data
+        #     stockdata = pd.concat(
+        #         [
+        #             stockdata,
+        #             pd.DataFrame(
+        #                 formatted_data, columns=["Date", "Open", "High", "Low", "Close"]
+        #             ),
+        #         ]
+        #     )
+        #     return stockdata.reset_index()[["Date"] + selected_columns].values.tolist()
+        # else:
+        #     return None
     else:
         return None

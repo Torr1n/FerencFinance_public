@@ -48,7 +48,7 @@ def update_stock_data_on_create(sender, instance, created, **kwargs):
                 cashflows=json.dumps(cash_flows),
             )
     else:
-        for emaperiod in instance.ema_set.all():
+        for emaperiod in instance.periods.all():
             data = pd.DataFrame(
                 json.loads(instance.data),
                 columns=["Date", "Open", "High", "Low", "Close"],
@@ -58,7 +58,10 @@ def update_stock_data_on_create(sender, instance, created, **kwargs):
             emalist = data[["Date", "EMA"]].values.tolist()
             emaperiod.ema = json.dumps(emalist)
             result = update_signals_and_xirr(
-                data, json.loads(emaperiod.signals), json.loads(emaperiod.cashflows)
+                instance.portfolio.type,
+                data,
+                json.loads(emaperiod.signals),
+                json.loads(emaperiod.cashflows),
             )
             signals, xirr, cash_flows, profit = result
             emaperiod.signals = json.dumps(signals)

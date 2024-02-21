@@ -154,12 +154,12 @@ class AllStocksHighestProfitEMAView(generics.ListAPIView):
 
                     if (
                         most_recent_signal["signal"] == "Buy"
-                        and (most_recent_date - signal_date).days <= 7
+                        and (most_recent_date - signal_date).days <= 5
                     ):
                         recent_trans = "Buy"
                     elif (
                         most_recent_signal["signal"] == "Sell"
-                        and (most_recent_date - signal_date).days <= 7
+                        and (most_recent_date - signal_date).days <= 5
                     ):
                         recent_trans = "Sell"
 
@@ -233,13 +233,10 @@ class UpdateAllStocksView(generics.ListCreateAPIView):
                 json.loads(stock.data),
                 columns=["Date", "Open", "High", "Low", "Close"],
             )
-
-            weekly_data = update_stock_data(stock.ticker, data_df)
+            weekly_data = update_stock_data(stock.ticker, data_df, stock.startDate)
 
             # Check if there is new data
             if weekly_data != None:
-                print(weekly_data)
-                print(stock.ticker)
                 # Update stock data
                 stock.data = json.dumps(weekly_data)
                 stock.save()
