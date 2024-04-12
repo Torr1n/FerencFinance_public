@@ -1,3 +1,4 @@
 from django.test import TestCase
 
-# Create your tests here.
+# did majority of testing / sanity checks via postman
+# (obviously not great for continuous deployment, will write automated suite once deploying to cloud)

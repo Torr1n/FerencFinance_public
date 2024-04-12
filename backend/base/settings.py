@@ -29,9 +29,7 @@ INSTALLED_APPS = [
     "django_filters",
     "rest_framework",
     "rest_framework.authtoken",  # Used to enable token authentication
-    "core",
-    "ecommerce",  # New app
-    "ferencfinance",  # Dad's app
+    "ferencfinance",
     "corsheaders",
 ]
 
@@ -46,7 +44,7 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
-ROOT_URLCONF = "drf_course.urls"
+ROOT_URLCONF = "base.urls"
 
 TEMPLATES = [
     {
@@ -64,7 +62,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = "drf_course.wsgi.application"
+WSGI_APPLICATION = "base.wsgi.application"
 
 
 # Database
